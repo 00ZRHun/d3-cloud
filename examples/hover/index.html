@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>After All This Time?</title>
+  <!-- Import D3 -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <!-- Random number generator -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.3/lib/alea.min.js"></script>
+  <!-- d3-cloud library -->
+  <script src="../../build/d3.layout.cloud.js"></script>
+  <link rel="stylesheet" type='text/css' href="style.css">
+
+</head>
+
+<body>
+
+  <div id='cloud-container'></div>
+
+  <script src="wordcloud.js"></script>
+  <script>
+  WordCloud({
+    container: '#cloud-container',
+    // data: './wolfstar.json'
+    // data: 'https://gist.githubusercontent.com/allisonking/ece2f8a08a626b7067381317a385a245/raw/9a3d112c87f1ae54a0c3162643165467b2709b9a/wolfstar.json'
+    // data: 'http://127.0.0.1:8000/get-tweet-text-w-title'
+    // data: 'http://127.0.0.1:8000/get-tweet-text-w-title'
+    // data: 'http://127.0.0.1:8000/get-tweet-text-w-title'
+
+  });
+
+  </script>
+
+</body>
+</html>
+
+<!-- source url: https://gist.github.com/allisonking/ece2f8a08a626b7067381317a385a245 -->

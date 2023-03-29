@@ -1,0 +1,45 @@
+{
+  "name": "d3-cloud",
+  "version": "1.2.5-rc1",
+  "description": "Generate word clouds in JavaScript.",
+  "keywords": [
+    "word",
+    "cloud",
+    "tag",
+    "visualization",
+    "canvas"
+  ],
+  "homepage": "http://www.jasondavies.com/wordcloud/",
+  "author": {
+    "name": "Jason Davies",
+    "url": "http://www.jasondavies.com/"
+  },
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/jasondavies/d3-cloud.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "mkdir -p build && browserify --standalone d3.layout.cloud index.js > build/d3.layout.cloud.js",
+    "start": "node examples/node.js",
+    "test": "jasmine-node test",
+    "test:browser": "cd test && bower install && open SpecRunner.html",
+    "preversion:src": "sed 's/version = \"[^,]*\"/version = \"'$npm_package_version'\"/' index.js  > output &&  mv output index.js",
+    "preversion:bower": "sed 's/\"version\": \"[^,]*\"/\"version\": \"'$npm_package_version'\"/' bower.json  > output &&  mv output bower.json",
+    "version": "npm run preversion:src && npm run preversion:bower && npm run build && git add index.js build bower.json"
+  },
+  "dependencies": {
+    "d3": "^3.5.17",
+    "d3-dispatch": "1"
+  },
+  "optionalDependencies": {
+    "canvas": "^1.6.7",
+    "jsdom": "^11.3.0"
+  },
+  "devDependencies": {
+    "browserify": "^11.2.0",
+    "jasmine-node": "^1.14.5",
+    "mersenne-twister": "^1.1.0"
+  }
+}

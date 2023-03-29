@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClickableWordCloud</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script>
+    <script src="../build/d3.layout.cloud.js"></script>
+
+    <!-- .bg {
+        background-color: red
+    }
+    .zoom {
+        display: inline-block;   /* this is needed for inline elements */
+        transition: transform 0.3s ease-in-out;
+    }
+    .zoom:hover {
+        transform: scale(4);
+    } -->
+    <style>
+        text {
+            display: inline-block;
+            transition: transform 0.3s ease-in-out;
+        }
+        text:hover {
+            opacity: .7 !important;
+            transform: scale(4);
+        }
+    </style>
+</head>
+<body>
+    <!-- <div background-color="grey"> -->
+    <div style="background-color: rgb(243, 243, 243)" id="wc"></div>
+
+    <script>
+        var fill = d3.scale.category20();
+        // url format: https://twitter.com/search?q={word}
+        var words = [{"text":"This", "url":"https://twitter.com/search?q=This"},
+                    {"text":"is", "url":"https://twitter.com/search?q=is"},
+                    {"text":"some", "url":"https://twitter.com/search?q=some"},
+                    {"text":"random", "url":"https://twitter.com/search?q=random"},
+                    {"text":"text", "url":"https://twitter.com/search?q=text"}]
+        var width = 800;
+        var height = 300;
+        for (var i = 0; i < words.length; i++) {
+        words[i].size = 10 + Math.random() * 90;
+        }
+
+        d3.layout.cloud()
+        .size([width, height])
+        .words(words)
+        .padding(5)
+        .rotate(function() { return ~~ (Math.random() * 2) * 90; })
+        .font("Impact")
+        .fontSize(function(d) { return d.size;})
+        .on("end", draw)
+        .start();
+
+        function draw(words) {
+            d3.select("#wc")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate("+ width/2 +","+ height/2 +")")
+            .selectAll("text")
+            .data(words)
+            .enter()
+            .append("text")
+            .style("font-size", function(d) { return d.size + "px"; })
+            .style("font-family", "Impact")
+            .style("fill", function(d, i) { return fill(i); })
+            .attr("text-anchor", "middle")
+            .attr("transform", function(d) {
+                return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; 
+            })
+            .text(function(d) { return d.text; })
+            .on("click", function (d, i){
+                window.open(d.url, "_blank");
+            })
+            // .on("mouseenter", function (d, i){
+            //     // console.log("123 = ", 123);
+            //     // $(this).css("background-color", "red")
+            // })
+            // .on("mouseleave", function (d, i){
+            //     window.open(d.url, "_blank");
+            // });
+        }
+    </script>
+</body>
+</html>

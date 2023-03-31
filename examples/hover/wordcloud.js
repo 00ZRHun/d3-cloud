@@ -65,7 +65,22 @@ function WordCloud(options) {
            })
            .text(function(d) { return d.key; })
            .on('mouseover', handleMouseOver)
-           .on('mouseout', handleMouseOut);
+           .on('mouseout', handleMouseOut)
+           .on("click", function (d, i){
+              console.log("d.key = ", d.key);
+              // window.open("https://twitter.com/search?q=This", "_blank")
+              // window.open("https://twitter.com/search?q=" + text, "_blank")
+              // window.open("https://twitter.com/search?q=" + d.key, "_blank")
+              ids = data['ids'][d.key]
+              console.log("ids = " + ids);
+              id_arr = String(ids).split(",")
+              console.log("id_arr = " + id_arr);
+              idx = Math.round(Math.random() * (id_arr.length-1))
+              console.log("idx = " + idx);
+              id = id_arr[idx];
+              console.log("id = " + id);
+              window.open("http://twitter.com/twitter/statuses/" + id, "_blank")
+           });
     }
   
     function handleMouseOver(d) {

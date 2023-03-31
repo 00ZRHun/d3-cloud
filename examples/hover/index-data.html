@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Cloud Demo</title>
+    <!-- Import D3 -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- Random number generator -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.3/lib/alea.min.js"></script>
+    <!-- d3-cloud library -->
+    <script src="../../build/d3.layout.cloud.js"></script>
+    <link rel="stylesheet" type='text/css' href="style.css">
+</head>
+<body>
+    
+    <div id='cloud-container'></div>
+
+    <script src="wordcloud.js"></script>
+    <script>
+        /* fetch("http://localhost:8080/api/v1/tweets?term=あんスタウェルカム祭")
+            .then(response => response.json())
+            .then(json => console.log("out = ", JSON.stringify(json))); */
+
+        const getJSON = async url => {
+        const response = await fetch(url);
+        return response.json(); // get JSON from the response 
+        // return response;
+        }
+        console.log("Fetching data...");
+
+        // https://localhost:8080/api/v1/tweets?term=%E3%81%82%E3%82%93%E3%82%B9%E3%82%BF%E3%82%A6%E3%82%A7%E3%83%AB%E3%82%AB%E3%83%A0%E7%A5%AD
+        // url = "https://soundcloud.com/oembed?url=http%3A//soundcloud.com/forss/flickermood&format=json"
+        // url = "http://localhost:8080/api/tweets/5";
+        // url = "http://localhost:8080/api/tweets"
+        // url = "https://localhost:8080/api/v1/tweets?term=あんスタウェルカム祭";
+        // url = "http://localhost:8080/api/tweets?term=term";
+        // url = "http://localhost:8080/api/tweets?term=あんスタ";
+        // url = "https://localhost:8080/api/v1/tweets?term=vacination";
+        hashtag = window.location.href.split("hashtag=")[1].split("&")[0].trim()   // get the path var of hashtag, which is between "hashtag=" and "&"(if any)
+        url = "http://localhost:8080/api/v1/tweets?term=" + hashtag;   // OPT: あんスタ, あんスタウェルカム祭, はじめてさんいらっしゃ〜い
+        console.log("url = ", url);
+        getJSON(url)
+        .then(data => {
+            console.log("data = ", data);
+
+            WordCloud({
+                container: '#cloud-container',
+                data: url
+            });
+        });
+    </script>
+</body>
+</html>

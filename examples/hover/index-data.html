@@ -38,16 +38,23 @@
         // url = "http://localhost:8080/api/tweets?term=term";
         // url = "http://localhost:8080/api/tweets?term=あんスタ";
         // url = "https://localhost:8080/api/v1/tweets?term=vacination";
-        hashtag = window.location.href.split("hashtag=")[1].split("&")[0].trim()   // get the path var of hashtag, which is between "hashtag=" and "&"(if any)
+        // hashtag = window.location.href.split("hashtag=")[1].split("&")[0].trim()   // get the path var of hashtag, which is between "hashtag=" and "&"(if any)
+        hashtag = "あんスタウェルカム祭"
         url = "http://localhost:8080/api/v1/tweets?term=" + hashtag;   // OPT: あんスタ, あんスタウェルカム祭, はじめてさんいらっしゃ〜い
         console.log("url = ", url);
         getJSON(url)
         .then(data => {
             console.log("data = ", data);
+            console.log("data[0] = ", data[0]);
+            console.log("data[0]['data'] = ", data[0]['data']);
+            jsonData = data[0]['data']
+            console.log("jsonData = ", jsonData);
 
             WordCloud({
                 container: '#cloud-container',
-                data: url
+                // data: data
+                // data: jsonData
+                data: "https://raw.githubusercontent.com/00ZRHun/d3-cloud/main/examples/hover/testing.json"
             });
         });
     </script>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="700" height="700"></svg>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
+    <script src="https://d3js.org/d3-scale.v1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.4/seedrandom.min.js"></script>
+    <script>
+        Math.seedrandom('hello words');
+
+        var data = [{ text: "Hello", count: 38 }, { text: "World", count: 27 }, { text: "Whatever", count: 21 }, { text: "Massive", count: 21 }, { text: "Thing", count: 16 }, { text: "Something", count: 14 }, { text: "What", count: 12 }, { text: "Else", count: 9 }, { text: "Blabla", count: 6 }, { text: "Small", count: 6 }, { text: "VeryLong", count: 6 }, { text: "Word", count: 3 }];
+
+        var svg = d3.select("svg").append("g");
+
+        let fill = d3.scaleOrdinal(d3.schemeCategory20);
+        let size = d3.scaleLinear().range([0, 20]).domain([0, d3.max(data, d => d.count)]);
+
+        let word_cloud_data = data
+            .map( function(d) {
+            return { text: d.text, size: 9 + size(d.count) * 3.5 };
+            });
+
+        let layout = d3.layout.cloud()
+            .size([275, 275])
+            .words(word_cloud_data)
+            .padding(2.5)
+            .rotate(d => ~~(Math.random() * 2) * -90)
+            .fontSize(d => d.size)
+            .on("end", draw);
+
+        layout.start();
+
+        function draw(words) {
+
+            svg.append("g")
+            .attr("transform", "translate(150,150)")
+            .selectAll("text")
+            .data(words)
+            .enter().append("text")
+            .style("fill", (d, i) => { d.color = fill(i); return d.color; })
+            .style("text-anchor", "middle")
+            .attr("transform", d => "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")")
+            .text(d => d.text)
+            .style("font-size", d => d.size + "px");
+        }
+    </script>
+</body>
+</html>

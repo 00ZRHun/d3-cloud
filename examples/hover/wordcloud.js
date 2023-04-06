@@ -1,7 +1,7 @@
 function WordCloud(options) {
     var margin = {top: 10, right: 100, bottom: 0, left: 100},   // OPT: top: 70
-             w = 600 - margin.left - margin.right,   // OPT: 1200, 100, 500
-             h = 600 - margin.top - margin.bottom;   // OPT: 400, 1200, 100, 500
+             w = 1000 - margin.left - margin.right,   // OPT: 1200, 100, 500, 600
+             h = 1000 - margin.top - margin.bottom;   // OPT: 400, 1200, 100, 500, 600
   
     // create the svg
     var svg = d3.select(options.container).append("svg")

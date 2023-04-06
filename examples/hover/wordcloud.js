@@ -22,7 +22,9 @@ function WordCloud(options) {
     var data;
     d3.json(options.data, function(error, d) {
       if (error) throw error;
-      data = d;
+      // data = d;
+      data = d[0]['data'];
+      console.log("data = ", data);
       var word_entries = d3.entries(data['count']);
       xScale.domain(d3.extent(word_entries, function(d) {return d.value;}));
   

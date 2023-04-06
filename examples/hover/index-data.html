@@ -20,44 +20,50 @@
 
     <script src="wordcloud.js"></script>
     <script>
-        /* fetch("http://localhost:8080/api/v1/tweets?term=あんスタウェルカム祭")
-            .then(response => response.json())
-            .then(json => console.log("out = ", JSON.stringify(json))); */
-
-        const getJSON = async url => {
-        const response = await fetch(url);
-        return response.json(); // get JSON from the response 
-        // return response;
-        }
-        console.log("Fetching data...");
-
-        // https://localhost:8080/api/v1/tweets?term=%E3%81%82%E3%82%93%E3%82%B9%E3%82%BF%E3%82%A6%E3%82%A7%E3%83%AB%E3%82%AB%E3%83%A0%E7%A5%AD
-        // url = "https://soundcloud.com/oembed?url=http%3A//soundcloud.com/forss/flickermood&format=json"
-        // url = "http://localhost:8080/api/tweets/5";
-        // url = "http://localhost:8080/api/tweets"
-        // url = "https://localhost:8080/api/v1/tweets?term=あんスタウェルカム祭";
-        // url = "http://localhost:8080/api/tweets?term=term";
-        // url = "http://localhost:8080/api/tweets?term=あんスタ";
-        // url = "https://localhost:8080/api/v1/tweets?term=vacination";
-        // hashtag = window.location.href.split("hashtag=")[1].split("&")[0].trim()   // get the path var of hashtag, which is between "hashtag=" and "&"(if any)
-        hashtag = "あんスタウェルカム祭"
-        url = "http://localhost:8080/api/v1/tweets?term=" + hashtag;   // OPT: あんスタ, あんスタウェルカム祭, はじめてさんいらっしゃ〜い
-        console.log("url = ", url);
-        getJSON(url)
-        .then(data => {
-            console.log("data = ", data);
-            console.log("data[0] = ", data[0]);
-            console.log("data[0]['data'] = ", data[0]['data']);
-            jsonData = data[0]['data']
-            console.log("jsonData = ", jsonData);
-
-            WordCloud({
-                container: '#cloud-container',
-                // data: data
-                // data: jsonData
-                data: "https://raw.githubusercontent.com/00ZRHun/d3-cloud/main/examples/hover/testing.json"
-            });
+        WordCloud({
+            container: '#cloud-container',
+            data: "https://raw.githubusercontent.com/00ZRHun/d3-cloud/main/examples/hover/testing.json"   // #あんスタ
+            // data: "https://raw.githubusercontent.com/00ZRHun/d3-cloud/main/examples/hover/testing2.json"   // #はじめてさんいらっしゃ〜い
         });
+        // /* fetch("http://localhost:8080/api/v1/tweets?term=あんスタウェルカム祭")
+        //     .then(response => response.json())
+        //     .then(json => console.log("out = ", JSON.stringify(json))); */
+
+        // const getJSON = async url => {
+        // const response = await fetch(url);
+        // return response.json(); // get JSON from the response 
+        // // return response;
+        // }
+        // console.log("Fetching data...");
+
+        // // https://localhost:8080/api/v1/tweets?term=%E3%81%82%E3%82%93%E3%82%B9%E3%82%BF%E3%82%A6%E3%82%A7%E3%83%AB%E3%82%AB%E3%83%A0%E7%A5%AD
+        // // url = "https://soundcloud.com/oembed?url=http%3A//soundcloud.com/forss/flickermood&format=json"
+        // // url = "http://localhost:8080/api/tweets/5";
+        // // url = "http://localhost:8080/api/tweets"
+        // // url = "https://localhost:8080/api/v1/tweets?term=あんスタウェルカム祭";
+        // // url = "http://localhost:8080/api/tweets?term=term";
+        // // url = "http://localhost:8080/api/tweets?term=あんスタ";
+        // // url = "https://localhost:8080/api/v1/tweets?term=vacination";
+        // // hashtag = window.location.href.split("hashtag=")[1].split("&")[0].trim()   // get the path var of hashtag, which is between "hashtag=" and "&"(if any)
+        // hashtag = "あんスタウェルカム祭"
+        // url = "http://localhost:8080/api/v1/tweets?term=" + hashtag;   // OPT: あんスタ, あんスタウェルカム祭, はじめてさんいらっしゃ〜い
+        // console.log("url = ", url);
+        // getJSON(url)
+        // .then(data => {
+        //     console.log("data = ", data);
+        //     console.log("data[0] = ", data[0]);
+        //     console.log("data[0]['data'] = ", data[0]['data']);
+        //     jsonData = data[0]['data']
+        //     console.log("jsonData = ", jsonData);
+
+        //     WordCloud({
+        //         container: '#cloud-container',
+        //         // data: data
+        //         // data: jsonData
+        //         data: "https://raw.githubusercontent.com/00ZRHun/d3-cloud/main/examples/hover/testing.json"   // #あんスタ
+        //         // data: "https://raw.githubusercontent.com/00ZRHun/d3-cloud/main/examples/hover/testing2.json"   // #はじめてさんいらっしゃ〜い
+        //     });
+        // });
     </script>
 </body>
 </html>
